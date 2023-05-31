@@ -71,26 +71,6 @@ int getGameRegion(const char *regionName) {
 	}
 }
 
-void extactWal(const char *isoFilename, const char *walFilename) {
-	FILE *slyIso = fopen(isoFilename, "rb");
-	FILE *slyWal = fopen(walFilename, "wb");
-	
-	fseek(slyIso, 0, SEEK_SET);
-	
-	printf("Copying sectors to %s\n", walFilename);
-	
-	uint8_t sectorData[SECTOR_SIZE];
-	for(int i = 0; i < 4; i++) {
-		fread(&sectorData, SECTOR_SIZE, 1, slyIso);
-		fwrite(&sectorData, SECTOR_SIZE, 1, slyWal);
-	}
-	
-	printf("Done!\n");
-	
-	fclose(slyWal);
-	fclose(slyIso);
-}
-
 int main(int argc, char *argv[]) {
 	printf("SlyWalDumper v1.0\n");
 	printf("Made by: 545u\n");
